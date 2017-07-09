@@ -1,4 +1,5 @@
 #include "PID.h"
+#include <iostream>
 
 using namespace std;
 
@@ -6,39 +7,39 @@ using namespace std;
 * TODO: Complete the PID class.
 */
 
-PID::PID() {}
+PID::PID() {
+
+	//Kp_ = 0.15;
+	//Ki_ = 0.0;
+	//Kd_ = 0.05;
+
+	p_error = 0; // init value
+	i_error = 0; // init value
+	d_error = 0; // init value
+
+}
 
 PID::~PID() {}
 
 void PID::Init(double Kp, double Ki, double Kd) 
 {
-	Kp = Kp;
-	Ki = Ki;
-	Kd = Kd;
-
-	p_error = -100; // init value
-	i_error = -100; // init value
+	Kp_ = Kp;
+	Ki_ = Ki;
+	Kd_ = Kd;
 }
 
 void PID::UpdateError(double cte)
 {
-	
-	// Check if we already have a valid initialize p_error
-	if(p_error == -100)
-	{
-		p_error = cte;
-	}
 
 	d_error = cte - p_error;
 
+	p_error = cte;
 
-
-
-
+	i_error += cte; 
 }
 
-double PID::TotalError() 
+double PID::SendControl()
 {
-	return i_error += cte; 
+	return - p_error * Kp_ - i_error * Ki_ - d_error * Kd_;
 }
 

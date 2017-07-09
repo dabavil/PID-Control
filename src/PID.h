@@ -13,9 +13,9 @@ public:
   /*
   * Coefficients
   */ 
-  double Kp;
-  double Ki;
-  double Kd;
+  double Kp_;
+  double Ki_;
+  double Kd_;
 
   /*
   * Constructor
@@ -38,9 +38,10 @@ public:
   void UpdateError(double cte);
 
   /*
-  * Calculate the total PID error.
+  *  Calculate the result of the PID control formula and return it
   */
-  double TotalError();
+
+  double SendControl();
 };
 
 #endif /* PID_H */
